@@ -13,6 +13,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $login->loginUser();
 
-    header("location: ../emprestimos.php?error=none");
+    header("location: ../emprestimos.php");
 
 }

@@ -1,6 +1,13 @@
+<?php
+    session_start();
+    if(!isset($_SESSION["userId"])) {
+        header("location: ./index.php?error=notloggedin");
+    }
+?>
+
 <html lang="pt-BR">
 
-<head>
+<head>3
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
