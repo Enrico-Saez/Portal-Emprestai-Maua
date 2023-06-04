@@ -4,7 +4,7 @@ class Login extends Dbh {
 
     protected function getUser($email, $password) {
 
-        $query = "SELECT id, senha FROM funcionario WHERE email = ?;";
+        $query = "SELECT id, senha FROM funcionario WHERE email = ? AND id_estado = 7;";
         $stmt = $this->connect()->prepare($query);
 
         //Verifica se a query funciona
@@ -22,15 +22,16 @@ class Login extends Dbh {
         }
 
         //Verifica se senha é igual
-        $dbPassword = $stmt->fetchAll(PDO::FETCH_ASSOC)[0]["senha"];
-        if(!$password == $dbPassword) {
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $dbPassword = $rows[0]["senha"];
+        if($password != $dbPassword) {
             $stmt = null;
             header("location: ../index.php?error=incorrectpassword");
             exit();
         }
 
         session_start();
-        $_SESSION["userId"] = $stmt->fetchAll(PDO::FETCH_ASSOC)[0]["id"];
+        $_SESSION["userId"] = $rows[0]["id"];
 
         $stmt = null;
 
