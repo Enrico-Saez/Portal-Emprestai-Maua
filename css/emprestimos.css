@@ -1,0 +1,23 @@
+body {
+    background-color: #D9D9D9;
+}
+.navbar {
+    background-color: #060b3b;
+}
+.navbar li a {
+    color: white;
+    text-decoration: none;
+}
+li {
+    list-style-type: none;
+}
+
+.btn {
+    background-color: white;
+    border-color: #060b3b;
+}
+
+.btn:hover {
+    background-color: #060b3b;
+    color: white;
+}
