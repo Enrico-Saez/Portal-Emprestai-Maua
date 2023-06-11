@@ -5,6 +5,9 @@
     }
 ?>
 
+<?php include "./classes/dbh.classes.php"; ?>
+<?php include "./classes/lendings.classes.php"; ?>
+
 <html lang="pt-BR">
 
 <head>
@@ -39,8 +42,8 @@
 
 <div class="m-4 text-center">
     <h2>Empréstimos</h2>
-    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#ModalEmprestimoComHora">Iniciar empréstimos com horário de devolução</button>
-    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#ModalEmprestimoSemHora">Iniciar empréstimos sem horário de devolução</button>
+    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#ModalAtivo">Iniciar empréstimos com horário de devolução</button>
+    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#ModalAtivo">Iniciar empréstimos sem horário de devolução</button>
 
 
 </div>
@@ -57,18 +60,29 @@
         </tr>
         </thead>
         <tbody class="table-group-divider">
+            <?php
+            $lendings = new Lendings();
+            $rows = $lendings->getLendings();
+            ?>
+            <?php foreach ($rows as $row): ?>
         <tr>
-            <td> <a href="#ModalAluno" data-bs-toggle="modal" data-bs-target="#ModalAluno">Enrico Ricardo Saez</a></td>
-            <td>??????</td>
-            <td>01/01/2023</td>
-            <td>01/01/2023</td>
-            <td>Roni</td>
-            <td>Em andamento</td>
+            <td> <a href="#ModalAluno" data-bs-toggle="modal" data-bs-target="#ModalAluno"><?php echo $row['aluno_nome']; ?></a></td>
+            <td><?php echo $row['ativo']; ?></td>
+            <td><?php echo $row['data_hora_emprestimo']; ?></td>
+            <td><?php echo $row['data_hora_devolucao']; ?></td>
+            <td><?php echo $row['func_nome']; ?></td>
+            <td><?php echo $row['estado_nome']; ?></td>
         </tr>
+        <?php endforeach; ?>
         </tbody>
     </table>
 </div>
 
+<?php
+    if(empty($rows)) {
+        echo "<h2>Não há empréstimos no momento</h2>";
+    }
+?>
 
 <!-- Modal Aluno Tabela-->
 <div class="modal fade" id="ModalAluno">
@@ -96,11 +110,13 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="ModalEmprestimoComHora">Escaneie o ativo do Notebook</h1>
+                <h1 class="modal-title fs-5" id="ModalAtivo">Escaneie o ativo do Notebook</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <input class="container" type="text" placeholder="Escaneie o ativo do notebook" id="barcode">
+                <form action="./includes/ativo.inc.php" method="post">
+                    <input class="container" type="text" placeholder="Escaneie o ativo do notebook" id="ativo-input" name="ativo-input">
+                </form>
             </div>
         </div>
     </div>
@@ -115,7 +131,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <input class="container" type="text" placeholder="Escaneie o QRCode do aluno" id="barcode2">
+                <input class="container" type="text" placeholder="Escaneie o QRCode do aluno" id="qrcode-input" name="qrcode-input">
             </div>
         </div>
     </div>
@@ -154,52 +170,52 @@
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const modalAtivo = document.getElementById('ModalAtivo');
-        const barcodeInput = document.getElementById('barcode');
+        const ativoInput = document.getElementById('ativo-input');
+        const modalQRCode = document.getElementById('ModalQRCode');
+        const QRCodeInput = document.getElementById('qrcode-input');
 
         modalAtivo.addEventListener('shown.bs.modal', function() {
-            barcodeInput.focus();
+            ativoInput.focus();
         });
 
-        barcodeInput.addEventListener('input', function() {
-            const barcodeValue = this.value;
-            if (barcodeValue.length === 5) {
-                modalAtivo.style.display = 'none';
-                const modalQRCode = document.getElementById('ModalQRCode');
-                const barcode2Input = document.getElementById('barcode2');
-                modal2.style.display = 'block';
-                barcode2Input.focus();
+        ativoInput.addEventListener('input', function() {
+            if (ativoInput.value.length === 5) {
+                toggleModal(modalAtivo);
+                toggleModal(modalQRCode);
+                QRCodeInput.focus();
             }
         });
 
-        barcodeInput.addEventListener('keyup', function(event) {
-            if (event.key === 'Enter') {
-                const barcodeValue = this.value;
-                if (barcodeValue.length === 5) {
-                    modalAtivo.style.display = 'none';
-                    const modal2 = document.getElementById('ModalEmprestimoComHora2');
-                    const barcode2Input = document.getElementById('barcode2');
-                    modal2.style.display = 'block';
-                    barcode2Input.focus();
-                }
+        ativoInput.addEventListener('keyup', function(event) {
+            if (event.key === 'Enter' && ativoInput.value.length === 5) {
+                toggleModal(modalAtivo);
+                toggleModal(modalQRCode);
+                QRCodeInput.focus();
             }
         });
 
-        const modal2 = document.getElementById('ModalEmprestimoComHora2');
-        const barcode2Input = document.getElementById('barcode2');
-
-        modal2.addEventListener('shown.bs.modal', function() {
-            barcode2Input.focus();
-        });
-
-        barcode2Input.addEventListener('input', function() {
-            const barcodeValue2 = this.value;
-            if (barcodeValue2.length === 5) {
-                modal2.submit();
+        QRCodeInput.addEventListener('input', function() {
+            if (QRCodeInput.value.length === 5) {
+                modalQRCode.submit();
             }
         });
+
+        function toggleModal(modal) {
+            if (modal.classList.contains('show')) {
+                modal.classList.remove('show');
+                modal.style.display = 'none';
+            } else {
+                modal.classList.add('show');
+                modal.style.display = 'block';
+            }
+        }
     });
 
+
+
 </script>
+
+<script ></script>
 
 
 </body>
