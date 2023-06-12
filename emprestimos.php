@@ -7,6 +7,7 @@
 
 <?php include "./classes/dbh.classes.php"; ?>
 <?php include "./classes/lendings.classes.php"; ?>
+<?php include "./classes/search-for-ongoing-lendings.class.php"; ?>
 
 <html lang="pt-BR">
 
@@ -127,7 +128,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="ModalEmprestimoComHora2">Escaneie QR Code do aluno</h1>
+                <h1 class="modal-title fs-5" id="ModalQRCode">Escaneie QR Code do aluno</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -173,30 +174,81 @@
         const ativoInput = document.getElementById('ativo-input');
         const modalQRCode = document.getElementById('ModalQRCode');
         const QRCodeInput = document.getElementById('qrcode-input');
+        let modalAtivoShown = false;
+        let modalQRCodeShown = false;
 
+        //Quando modal é exibido, foco no input depois de 2s
         modalAtivo.addEventListener('shown.bs.modal', function() {
-            ativoInput.focus();
+            modalAtivoShown = true;
+            ativoInput.value = "";
+            ativoInput.disabled = true;
+            setTimeout(function() {
+                ativoInput.disabled = false;
+                ativoInput.focus();
+            }, 2000);
+        });
+
+        //Quando modal é exibido, foco no input depois de 2s
+        modalQRCode.addEventListener('shown.bs.modal', function() {
+            modalQRCodeShown = true;
+            QRCodeInput.value = "";
+            QRCodeInput.disabled = true;
+            setTimeout(function() {
+                QRCodeInput.disabled = false;
+                QRCodeInput.focus();
+            }, 2000);
         });
 
         ativoInput.addEventListener('input', function() {
-            if (ativoInput.value.length === 5) {
+            if(ativoInput.value.length === 5) {
                 toggleModal(modalAtivo);
                 toggleModal(modalQRCode);
-                QRCodeInput.focus();
-            }
-        });
-
-        ativoInput.addEventListener('keyup', function(event) {
-            if (event.key === 'Enter' && ativoInput.value.length === 5) {
-                toggleModal(modalAtivo);
-                toggleModal(modalQRCode);
-                QRCodeInput.focus();
             }
         });
 
         QRCodeInput.addEventListener('input', function() {
-            if (QRCodeInput.value.length === 5) {
-                modalQRCode.submit();
+            if(QRCodeInput.value.length === 5) {
+                toggleModal(modalQRCode);
+                toggleModal(modalAtivo);
+            }
+        });
+
+        let lastKeyPressTime = 0;
+        let inputThreshold = 20;
+
+        ativoInput.addEventListener('keydown', function(event) {
+            let currentTime = new Date().getTime();
+            let elapsedTime = currentTime - lastKeyPressTime;
+            lastKeyPressTime = currentTime;
+
+            if (elapsedTime > inputThreshold) {
+                ativoInput.value = '';
+            }
+        });
+
+        QRCodeInput.addEventListener('keydown', function(event) {
+            let currentTime = new Date().getTime();
+            let elapsedTime = currentTime - lastKeyPressTime;
+            lastKeyPressTime = currentTime;
+
+            if (elapsedTime > inputThreshold) {
+                ativoInput.value = '';
+            }
+        });
+
+        ativoInput.addEventListener('focusout', function() {
+            if (modalAtivoShown) {
+                setTimeout(function() {
+                    ativoInput.focus();
+                }, 0);
+            }
+        });
+
+        QRCodeInput.addEventListener('focusout', function() {
+            if (modalQRCodeShown) {
+                setTimeout(function() {
+                    QRCodeInput.focus();
+                }, 0);
             }
         });
 
@@ -204,19 +256,27 @@
             if (modal.classList.contains('show')) {
                 modal.classList.remove('show');
                 modal.style.display = 'none';
+                document.body.classList.remove('modal-open');
             } else {
+                triggerModalShownEvent(modal)
                 modal.classList.add('show');
                 modal.style.display = 'block';
+                document.body.classList.add('modal-open');
             }
+        }
+
+        function triggerModalShownEvent(modal) {
+            const shownEvent = new Event('shown.bs.modal', {
+                bubbles: true,
+                cancelable: true
+            });
+            modal.dispatchEvent(shownEvent);
         }
     });
 
 
 
 </script>
-
-<script ></script>
-
 
 </body>
 
