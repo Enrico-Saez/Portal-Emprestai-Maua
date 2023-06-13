@@ -106,37 +106,37 @@
 
 
 
-<!-- Modal ativo-->
-<div class="modal fade" id="ModalAtivo">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="ModalAtivo">Escaneie o ativo do Notebook</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form action="./includes/ativo.inc.php" method="post">
-                    <input class="container" type="text" placeholder="Escaneie o ativo do notebook" id="ativo-input" name="ativo-input">
-                </form>
+<form action="./includes/lending-register.inc.php" method="post" id="lending-form">
+    <!-- Modal ativo-->
+    <div class="modal fade" id="ModalAtivo">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="ModalAtivo">Escaneie o ativo do Notebook</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input class="container" type="password" placeholder="Escaneie o ativo do notebook" id="ativo-input" name="ativo-input">
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<!-- Modal qr code-->
-<div class="modal fade" id="ModalQRCode">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="ModalQRCode">Escaneie QR Code do aluno</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <input class="container" type="text" placeholder="Escaneie o QRCode do aluno" id="qrcode-input" name="qrcode-input">
+    <!-- Modal qr code-->
+    <div class="modal fade" id="ModalQRCode">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="ModalQRCode">Escaneie QR Code do aluno</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input class="container" type="password" placeholder="Escaneie o QRCode do aluno" id="qrcode-input" name="qrcode-input">
+                </div>
             </div>
         </div>
     </div>
-</div>
+</form>
 
 <!-- Modal ativo sem horário-->
 <div class="modal fade" id="ModalAtivoSemHora">
@@ -174,6 +174,7 @@
         const ativoInput = document.getElementById('ativo-input');
         const modalQRCode = document.getElementById('ModalQRCode');
         const QRCodeInput = document.getElementById('qrcode-input');
+        const lendingForm = document.getElementById('lending-form');
         let modalAtivoShown = false;
         let modalQRCodeShown = false;
 
@@ -209,14 +210,16 @@
 
         ativoInput.addEventListener('input', function() {
             if(ativoInput.value.length === 5) {
+                // Enviar pro banco
                 toggleModal(modalAtivo);
                 toggleModal(modalQRCode);
             }
         });
 
         QRCodeInput.addEventListener('input', function() {
-            if(QRCodeInput.value.length === 5) {
+            if(QRCodeInput.value.length === 8) {
                 toggleModal(modalQRCode);
+                lendingForm.submit();
                 toggleModal(modalAtivo);
             }
         });
@@ -261,16 +264,14 @@
         });
 
         function toggleModal(modal) {
-            if (modal.classList.contains('show')) {
-                triggerModalHiddenEvent(modal)
-                modal.classList.remove('show');
-                modal.style.display = 'none';
-                document.body.classList.remove('modal-open');
-            } else {
-                triggerModalShownEvent(modal)
-                modal.classList.add('show');
-                modal.style.display = 'block';
+            if (modal.classList.contains('d-none')) {
+                triggerModalShownEvent(modal);
+                modal.classList.remove('d-none');
                 document.body.classList.add('modal-open');
+            } else {
+                triggerModalHiddenEvent(modal);
+                modal.classList.add('d-none');
+                document.body.classList.remove('modal-open');
             }
         }
 
@@ -290,9 +291,6 @@
             modal.dispatchEvent(hiddenEvent);
         }
     });
-
-
-
 </script>
 
 </body>
