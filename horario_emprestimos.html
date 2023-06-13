@@ -40,7 +40,75 @@
         </div>
     </nav>
     <div class="m-4 text-center">
-        <h2><strong>Manutenção</strong></h2>
+        <h2><strong>Horários de Empréstimo</strong></h2>
+    </div>
+    <div class="container">
+
+        <div class="row">
+            <div class="selecionar_lab col">
+                <h6>Escolha o laboratório:</h6>
+            </div>
+            <div class="col row">
+                <select name="laboratório" id="laboratório">
+                    <option value="null">selecione</option>
+                    <option value="lab1">lab1</option>
+                    <option value="lab2">lab2</option>
+                </select>
+            </div>
+        </div>
+
+        <table id="tabela_horarios" class="table table-hover mt-4">
+            <thead>
+                <tr>
+                    <th scope="col">Horários</th>
+                    <th scope="col">Segunda</th>
+                    <th scope="col">Terça</th>
+                    <th scope="col">Quarta</th>
+                    <th scope="col">Quinta</th>
+                    <th scope="col">Sexta</th>
+                </tr>
+            </thead>
+            
+            <tbody class="table-group-divider">
+                <tr>
+                    <th scope="row">7h40 às 9h20</th>
+                    <td><input type="checkbox" id="segunda_7h40" name="subscribe" value="segunda_7h40" /></td>
+                    <td><input type="checkbox" id="terca_7h40" name="subscribe" value="terca_7h40" /></td>
+                    <td><input type="checkbox" id="quarta_7h40" name="subscribe" value="quarta_7h40" /></td>
+                    <td><input type="checkbox" id="quinta_7h40" name="subscribe" value="quinta_7h40" /></td>
+                    <td><input type="checkbox" id="sexta_7h40" name="subscribe" value="sexta_7h40" /></td>
+                </tr>
+                <tr>
+                    <th scope="row">9h30 às 11h10</th>
+                    <td><input type="checkbox" id="segunda_9h30" name="subscribe" value="segunda_9h30" /></td>
+                    <td><input type="checkbox" id="terca_9h30" name="subscribe" value="terca_9h30" /></td>
+                    <td><input type="checkbox" id="quarta_9h30" name="subscribe" value="quarta_9h30" /></td>
+                    <td><input type="checkbox" id="quinta_9h30" name="subscribe" value="quinta_9h30" /></td>
+                    <td><input type="checkbox" id="sexta_9h30" name="subscribe" value="sexta_9h30" /></td>
+                </tr>
+                <tr>
+                    <th scope="row">11h20 às 13h00</th>
+                    <td><input type="checkbox" id="segunda_11h20" name="subscribe" value="segunda_11h20" /></td>
+                    <td><input type="checkbox" id="terca_11h20" name="subscribe" value="terca_11h20" /></td>
+                    <td><input type="checkbox" id="quarta_11h20" name="subscribe" value="quarta_11h20" /></td>
+                    <td><input type="checkbox" id="quinta_11h20" name="subscribe" value="quinta_11h20" /></td>
+                    <td><input type="checkbox" id="sexta_11h20" name="subscribe" value="sexta_11h20" /></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="row">
+            <h6 class="col">Tempo de tolerância:</h6>
+            <!-- Será um tempo de tolerância para o lab em si?-->
+            <select class="col" name="laboratório" id="laboratório">
+                <option value="tempo1">5min</option>
+                <option value="tempo2">10min</option>
+                <option value="tempo3">15min</option>
+            </select>
+        </div>
+        <div class="text-center m-5">
+                        <input type="submit" value="Salvar alterações">
+        </div>
     </div>
 </body>
 
