@@ -13,11 +13,12 @@ li {
 }
 
 .btn {
-    background-color: white;
-    border-color: #060b3b;
+    background-color: #060b3b;
+    color: white;
 }
 
 .btn:hover {
-    background-color: #060b3b;
-    color: white;
+    background-color: white;
+    border-color: #060b3b;
+    color: #060b3b;
 }
