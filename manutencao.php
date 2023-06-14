@@ -75,9 +75,14 @@ if(!isset($_SESSION["userId"])) {
         <div class="collapse" id="collapseAluno2">
             <div class="card card-body mb-3">
                 <div class="Alunos">
-                    <p>Alterar estado de aluno</p>
-                    <form action="" method="get">
-                        <input type="search" placeholder="RA">
+                    <p>Alterar Estado de Aluno:</p>
+                    <form action="./includes/student-status-update.inc.php" method="post">
+                        <input type="text" id="ra-status" name="ra-status" maxlength="8" placeholder="Digite o RA:">
+                        <label for="mySelect">Selecione:</label>
+                        <select name="status-status">
+                            <option value="4">Ativo (ainda é aluno)</option>
+                            <option value="5">Inativo (não é mais aluno)</option>
+                        </select>
                         <input type="submit" value="Confirmar">
                     </form>
                 </div>
@@ -172,5 +177,7 @@ if(!isset($_SESSION["userId"])) {
     </div>
 </div>
 </body>
+
+
 
 </html>

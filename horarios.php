@@ -48,8 +48,8 @@ if(!isset($_SESSION["userId"])) {
             <h6>Escolha o curso:</h6>
         </div>
         <div class="col row">
+            <label for="mySelect">Selecione:</label>
             <select name="curso" id="curso">
-                <option value="null">selecione</option>
                 <option value="cic">Ciência da Computação</option>
                 <option value="si">Sistemas de Informação</option>
                 <option value="design">Design</option>
