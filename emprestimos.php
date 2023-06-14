@@ -7,7 +7,6 @@
 
 <?php include "./classes/dbh.classes.php"; ?>
 <?php include "./classes/lendings.classes.php"; ?>
-<?php include "./classes/search-for-ongoing-lendings.class.php"; ?>
 
 <html lang="pt-BR">
 
@@ -32,7 +31,7 @@
         <div>
             <ul class="navbar m-2 ">
                 <li class="mx-3"><a href="./emprestimos.php">Empréstimos</a></li>
-                <li class="mx-3"><a href="/tab_historico.html">Histórico</a></li>
+                <li class="mx-3"><a href="./historico.php">Histórico</a></li>
                 <li class="mx-3"><a href="/tab_alunos.html">Alunos</a></li>
                 <li class="mx-3"><a href="/tab_notebooks.html">Notebooks</a></li>
                 <li class="mx-3"><a href="/estatisticas.html">Estatísticas</a></li>
@@ -45,6 +44,7 @@
     <h2>Empréstimos</h2>
     <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#ModalEmprestimo">Iniciar empréstimos</button>
     <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#ModalEmprestimoEspecial">Iniciar empréstimos de alunos não cadastrados</button>
+    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#ModalDevolucao">Iniciar devolução</button>
 
 
 </div>
@@ -106,7 +106,7 @@
 
 
 
-<!-- Modal ativo-->
+<!-- Modal Empréstimo-->
 <div class="modal fade" id="ModalEmprestimo">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -126,8 +126,8 @@
 
 
 
-<!-- Modal ativo sem horário-->
-<div class="modal fade" id="ModalAtivoEspecial">
+<!-- Modal Empréstimo de alunos não cadastrados-->
+<div class="modal fade" id="ModalEmprestimoEspecial">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -141,20 +141,26 @@
     </div>
 </div>
 
-<!-- Modal qr code sem horário-->
-<div class="modal fade" id="ModalQRCodeSemHora">
+
+
+<!-- Modal Devolução-->
+<div class="modal fade" id="ModalDevolucao">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="ModalEmprestimoComHora2">Escaneie o QR Code do aluno</h1>
+                <h1 class="modal-title fs-5" id="ModalDevolucao">Devolução</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                <input class="container" type="text" placeholder="Escaneie o QR Code do aluno" id="barcode">
-            </div>
+            <form action="./includes/return-register.inc.php" method="post" id="return-form">
+                <div class="modal-body">
+                    <input class="container" type="password" maxlength="5" placeholder="Escaneie o ativo do notebook" id="ativo-input-devol" name="ativo-input-devol">
+                </div>
+            </form>
         </div>
     </div>
 </div>
+
+
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -239,6 +245,60 @@
 
             if (elapsedTime > inputThreshold) {
                 QRCodeInput.value = '';
+            }
+        });
+    });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const modalDevolucao = document.getElementById('ModalDevolucao');
+        const ativoInputDevol = document.getElementById('ativo-input-devol');
+        const returnForm = document.getElementById('return-form');
+        let modalDevolucaoShown = false;
+
+        //Quando modal é exibido, foco no input depois de 1s
+        modalDevolucao.addEventListener('shown.bs.modal', function() {
+            modalDevolucaoShown = true;
+            ativoInputDevol.focus();
+        });
+
+        modalDevolucao.addEventListener('hidden.bs.modal', function() {
+            modalDevolucaoShown = false;
+        });
+
+        ativoInputDevol.addEventListener('input', function() {
+            if(ativoInputDevol.value.length === 5) {
+                returnForm.submit();
+            }
+        });
+
+
+        //Lógica para inputs não saírem de foco
+
+
+        ativoInputDevol.addEventListener('focusout', function() {
+            if (modalDevolucaoShown) {
+                setTimeout(function() {
+                    ativoInputDevol.focus();
+                }, 0);
+            }
+        });
+
+
+        //Lógica pra inputs funcionarem só com leitor de código de barras
+
+
+        let lastKeyPressTime = 0;
+        let inputThreshold = 20;
+
+        ativoInputDevol.addEventListener('keydown', function(event) {
+            let currentTime = new Date().getTime();
+            let elapsedTime = currentTime - lastKeyPressTime;
+            lastKeyPressTime = currentTime;
+
+            if (elapsedTime > inputThreshold) {
+                ativoInputDevol.value = '';
             }
         });
     });

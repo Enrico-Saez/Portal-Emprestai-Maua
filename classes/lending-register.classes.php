@@ -53,7 +53,7 @@ class LendingRegister extends SearchForOngoingLendings {
         $stmt = $this->connect()->prepare($query);
 
         session_start();
-        if(!$stmt->execute(array($id_aluno, $id_equipamento, date('Y-m-d H:i:s'), $_SESSION["userId"]))) {
+        if(!$stmt->execute(array($id_aluno, $id_equipamento, date('Y-m-d H:i:s', strtotime('now')), $_SESSION["userId"]))) {
             $stmt = null;
             header("location: ../emprestimos.php?error=stmtfailed");
             exit();
