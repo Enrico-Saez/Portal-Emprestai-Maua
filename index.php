@@ -7,12 +7,12 @@
     <title>Emprestaí, Mauá!</title>
 </head>
 <body class="bg">
-  <div class="container caixa_login col-sm-12 col-md-6 float-end">
+  <div class="container caixa_login col-sm-12 col-md-5">
     <div class="mt-5">
         <img class="logo
-        " src="/emprestai_logo.png" alt="Emprestaí, Mauá">
+        " src="/media/medidacerta.png" alt="Emprestaí, Mauá">
     </div>
-
+    
     <form class="inputs" action="includes/login.inc.php" method="post">
       <div class="login form-group m-2">
         <p id="campo_txt_login">Login:</p>
