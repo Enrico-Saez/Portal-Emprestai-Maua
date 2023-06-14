@@ -107,7 +107,7 @@ if(!isset($_SESSION["userId"])) {
                     <p>Registro de Notebooks</p>
                     <form action="" method="get">
                         <input type="text" placeholder="Marca">
-                        <input type="text" placeholder="RA">
+                        <input type="text" placeholder="Modelo">
                         <button type="button" data-bs-toggle="modal"
                                 data-bs-target="#ModalRegistro">Registrar</button>
                     </form>
@@ -118,16 +118,14 @@ if(!isset($_SESSION["userId"])) {
             <div class="card card-body mb-3">
                 <div class="Alunos">
                     <p>Alterar estado de notebook</p>
-                    <form action="" method="get">
-                        <input type="search" placeholder="Ativo">
-                        <button type="button">Selecionar</button>
-
-                        <select name="estado" id="estado_notebook" disabled="disabled">
-                            <option value="opcao1">Opção 1</option>
-                            <option value="opcao2">Opção 2</option>
-                            <option value="opcao3">Opção 3</option>
+                    <form action="./includes/laptop-status-update.inc.php" method="post">
+                        <input type="text" id="ativo-status" name="ativo-status" maxlength="5" placeholder="Digite o Ativo:">
+                        <label for="mySelect">Selecione:</label>
+                        <select name="status-status">
+                            <option value="1">Ativo (notebook disponível)</option>
+                            <option value="3">Inativo (notebook descartado)</option>
                         </select>
-
+                        <input type="submit" value="Confirmar">
                     </form>
                 </div>
             </div>
@@ -138,7 +136,7 @@ if(!isset($_SESSION["userId"])) {
 
 
 
-<!--Modal-->
+<!--Modal de Registro-->
 <div class="modal fade" id="ModalRegistro">
     <div class="modal-dialog modal-dialog-centered modal-sm modal-dialog-scrollable">
         <div class="modal-content">
