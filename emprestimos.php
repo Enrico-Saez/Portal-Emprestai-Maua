@@ -43,8 +43,8 @@
 
 <div class="m-4 text-center">
     <h2>Empréstimos</h2>
-    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#ModalAtivo">Iniciar empréstimos com horário de devolução</button>
-    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#ModalAtivo">Iniciar empréstimos sem horário de devolução</button>
+    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#ModalEmprestimo">Iniciar empréstimos</button>
+    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#ModalEmprestimoEspecial">Iniciar empréstimos de alunos não cadastrados</button>
 
 
 </div>
@@ -106,44 +106,32 @@
 
 
 
-<form action="./includes/lending-register.inc.php" method="post" id="lending-form">
-    <!-- Modal ativo-->
-    <div class="modal fade" id="ModalAtivo">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="ModalAtivo">Escaneie o ativo do Notebook</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <input class="container" type="password" placeholder="Escaneie o ativo do notebook" id="ativo-input" name="ativo-input">
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal qr code-->
-    <div class="modal fade" id="ModalQRCode">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="ModalQRCode">Escaneie QR Code do aluno</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <input class="container" type="password" placeholder="Escaneie o QRCode do aluno" id="qrcode-input" name="qrcode-input">
-                </div>
-            </div>
-        </div>
-    </div>
-</form>
-
-<!-- Modal ativo sem horário-->
-<div class="modal fade" id="ModalAtivoSemHora">
+<!-- Modal ativo-->
+<div class="modal fade" id="ModalEmprestimo">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="ModalEmprestimoComHora">Escaneie o ativo do Notebook</h1>
+                <h1 class="modal-title fs-5" id="ModalAtivo">Empréstimo</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="./includes/lending-register.inc.php" method="post" id="lending-form">
+                <div class="modal-body">
+                    <input class="container" type="password" maxlength="5" placeholder="Escaneie o ativo do notebook" id="ativo-input" name="ativo-input">
+                    <input class="container" type="password" maxlength="8" placeholder="Escaneie o QRCode do aluno" id="qrcode-input" name="qrcode-input">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Modal ativo sem horário-->
+<div class="modal fade" id="ModalAtivoEspecial">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="ModalEmprestimoComHora">Empréstimo de alunos não cadastrados</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -170,59 +158,66 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const modalAtivo = document.getElementById('ModalAtivo');
+        const modalEmprestimo = document.getElementById('ModalEmprestimo');
         const ativoInput = document.getElementById('ativo-input');
-        const modalQRCode = document.getElementById('ModalQRCode');
         const QRCodeInput = document.getElementById('qrcode-input');
         const lendingForm = document.getElementById('lending-form');
-        let modalAtivoShown = false;
-        let modalQRCodeShown = false;
+        let modalEmprestimoShown = false;
+        let ativoInputBeingUsed = false;
+        let QRCodeInputBeingUsed = false;
 
-        //Quando modal é exibido, foco no input depois de 2s
-        modalAtivo.addEventListener('shown.bs.modal', function() {
-            modalAtivoShown = true;
-            ativoInput.value = "";
-            ativoInput.disabled = true;
-            setTimeout(function() {
-                ativoInput.disabled = false;
-                ativoInput.focus();
-            }, 2000);
-        });
-
-        //Quando modal é exibido, foco no input depois de 2s
-        modalQRCode.addEventListener('shown.bs.modal', function() {
-            modalQRCodeShown = true;
-            QRCodeInput.value = "";
+        //Quando modal é exibido, foco no input depois de 1s
+        modalEmprestimo.addEventListener('shown.bs.modal', function() {
+            modalEmprestimoShown = true;
             QRCodeInput.disabled = true;
-            setTimeout(function() {
-                QRCodeInput.disabled = false;
-                QRCodeInput.focus();
-            }, 2000);
+            ativoInputBeingUsed = true;
+            ativoInput.focus();
         });
 
-        modalAtivo.addEventListener('hidden.bs.modal', function() {
-            modalAtivoShown = false;
-        });
-
-        modalQRCode.addEventListener('hidden.bs.modal', function() {
-            modalQRCodeShown = false;
+        modalEmprestimo.addEventListener('hidden.bs.modal', function() {
+            modalEmprestimoShown = false;
         });
 
         ativoInput.addEventListener('input', function() {
             if(ativoInput.value.length === 5) {
-                // Enviar pro banco
-                toggleModal(modalAtivo);
-                toggleModal(modalQRCode);
+                ativoInputBeingUsed = false;
+                setTimeout(function() {
+                    QRCodeInput.disabled = false;
+                    QRCodeInputBeingUsed = true;
+                    QRCodeInput.focus();
+                }, 1000);
             }
         });
 
         QRCodeInput.addEventListener('input', function() {
             if(QRCodeInput.value.length === 8) {
-                toggleModal(modalQRCode);
                 lendingForm.submit();
-                toggleModal(modalAtivo);
             }
         });
+
+
+        //Lógica para inputs não saírem de foco
+
+
+        ativoInput.addEventListener('focusout', function() {
+            if (modalEmprestimoShown && ativoInputBeingUsed) {
+                setTimeout(function() {
+                    ativoInput.focus();
+                }, 0);
+            }
+        });
+
+        QRCodeInput.addEventListener('focusout', function() {
+            if (modalEmprestimoShown && QRCodeInputBeingUsed) {
+                setTimeout(function() {
+                    QRCodeInput.focus();
+                }, 0);
+            }
+        });
+
+
+        //Lógica pra inputs funcionarem só com leitor de código de barras
+
 
         let lastKeyPressTime = 0;
         let inputThreshold = 20;
@@ -243,53 +238,9 @@
             lastKeyPressTime = currentTime;
 
             if (elapsedTime > inputThreshold) {
-                ativoInput.value = '';
+                QRCodeInput.value = '';
             }
         });
-
-        ativoInput.addEventListener('focusout', function() {
-            if (modalAtivoShown) {
-                setTimeout(function() {
-                    ativoInput.focus();
-                }, 0);
-            }
-        });
-
-        QRCodeInput.addEventListener('focusout', function() {
-            if (modalQRCodeShown) {
-                setTimeout(function() {
-                    QRCodeInput.focus();
-                }, 0);
-            }
-        });
-
-        function toggleModal(modal) {
-            if (modal.classList.contains('d-none')) {
-                triggerModalShownEvent(modal);
-                modal.classList.remove('d-none');
-                document.body.classList.add('modal-open');
-            } else {
-                triggerModalHiddenEvent(modal);
-                modal.classList.add('d-none');
-                document.body.classList.remove('modal-open');
-            }
-        }
-
-        function triggerModalShownEvent(modal) {
-            const shownEvent = new Event('shown.bs.modal', {
-                bubbles: true,
-                cancelable: true
-            });
-            modal.dispatchEvent(shownEvent);
-        }
-
-        function triggerModalHiddenEvent(modal) {
-            const hiddenEvent = new Event('hidden.bs.modal', {
-                bubbles: true,
-                cancelable: true
-            });
-            modal.dispatchEvent(hiddenEvent);
-        }
     });
 </script>
 

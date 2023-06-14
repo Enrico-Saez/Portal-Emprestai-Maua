@@ -11,11 +11,6 @@ class LendingRegisterController extends LendingRegister {
     }
 
     public function registerLending() {
-        // Debugging code
-        echo "Ativo: " . $this->ativo . "<br>";
-        echo "RA: " . $this->ra . "<br>";
-        exit();
-
         if($this->emptyInput()) {
             header("location: ../emprestimos.php?error=emptyinput");
             exit();
