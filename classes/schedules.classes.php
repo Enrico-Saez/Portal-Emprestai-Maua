@@ -1,8 +1,36 @@
 <?php
 
-class LendingRegister extends SearchForOngoingLendings {
+class Schedules extends Dbh {
 
-    protected function register($ra, $ativo) {
+    protected function getCourses()
+    {
+
+        $query = "SELECT DISTINCT nome from curso;";
+
+        $stmt = $this->connect()->prepare($query);
+
+        if (!$stmt->execute()) {
+            $stmt = null;
+            header("location: ../horarios.php?error=stmtfailed");
+            exit();
+        }
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    }
+
+    protected function
+
+
+
+
+
+
+
+
+
+
+
 
 
         //Verifica se já há empréstimo com esse RA ou esse ativo
@@ -61,6 +89,5 @@ class LendingRegister extends SearchForOngoingLendings {
 
         $stmt = null;
 
-    }
 
 }

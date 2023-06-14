@@ -8,7 +8,7 @@ class returnRegister extends Dbh{
 
 
 
-        $query = "SELECT id_estado FROM emprestimo WHERE id_estado = 9 OR 10 AND id_equipamento IN (
+        $query = "SELECT id_estado FROM emprestimo WHERE id_estado = 8 OR 9 AND id_equipamento IN (
                     SELECT id FROM equipamento WHERE ativo = ?)";
         $stmt = $this->connect()->prepare($query);
 
@@ -28,10 +28,7 @@ class returnRegister extends Dbh{
 
 
 
-
-        $estadoDevolucao =
-
-        $query = "UPDATE emprestimo SET data_hora_devolucao = ?, id_func_devolucao = ?, id_estado = ? WHERE id_estado = 9 OR 10 AND id_equipamento IN (
+        $query = "UPDATE emprestimo SET data_hora_devolucao = ?, id_func_devolucao = ?, id_estado = ? WHERE id_estado = 8 OR 9 AND id_equipamento IN (
 	                SELECT id FROM equipamento WHERE ativo = ?);";
         $stmt = $this->connect()->prepare($query);
 

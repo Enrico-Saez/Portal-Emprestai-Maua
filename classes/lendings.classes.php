@@ -10,7 +10,7 @@ class Lendings extends Dbh {
                         INNER JOIN equipamento ON equipamento.id = emprestimo.id_equipamento
                         INNER JOIN funcionario ON funcionario.id = emprestimo.id_func_emprestimo
                         INNER JOIN estado ON estado.id = emprestimo.id_estado
-	                    WHERE emprestimo.id_estado = 9 OR 10 AND equipamento.id_tipo_equipamento = 1;";
+	                    WHERE emprestimo.id_estado = 8 OR 9 AND equipamento.id_tipo_equipamento = 1;";
 
         $stmt = $this->connect()->prepare($query);
 

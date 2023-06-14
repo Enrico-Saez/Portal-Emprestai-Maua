@@ -32,8 +32,8 @@ if(!isset($_SESSION["userId"])) {
             <ul class="navbar m-2 ">
                 <li class="mx-3"><a href="./emprestimos.php">Empréstimos</a></li>
                 <li class="mx-3"><a href="./historico.php">Histórico</a></li>
-                <li class="mx-3"><a href="/tab_alunos.html">Alunos</a></li>
-                <li class="mx-3"><a href="/tab_notebooks.html">Notebooks</a></li>
+                <li class="mx-3"><a href="/tab_alunos.html">Manutenção</a></li>
+                <li class="mx-3"><a href="./horarios.php">Horários</a></li>
                 <li class="mx-3"><a href="/estatisticas.html">Estatísticas</a></li>
             </ul>
         </div>
@@ -58,30 +58,42 @@ if(!isset($_SESSION["userId"])) {
     </div>
 
     <div>
-        <table class="table table-striped">
+        <table class="table container table-striped">
             <thead>
             <tr>
                 <th>Aluno</th>
                 <th>Notebook</th>
                 <th>Data/hora empréstimo</th>
-                <th>Data/hora devolução</th>
+                <th>Previsão devolução</th>
                 <th>Funcionário empréstimo</th>
-                <th>Funcionário devolução</th>
+                <th>Status</th>
             </tr>
             </thead>
             <tbody class="table-group-divider">
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
+            <?php
+            $history = new History();
+            $rows = $history->getHistory();
+            ?>
+            <?php foreach ($rows as $row): ?>
+                <tr>
+                    <td> <a href="#ModalAluno" data-bs-toggle="modal" data-bs-target="#ModalAluno"><?php echo $row['aluno_nome']; ?></a></td>
+                    <td><?php echo $row['ativo']; ?></td>
+                    <td><?php echo $row['data_hora_emprestimo']; ?></td>
+                    <td><?php echo $row['data_hora_devolucao']; ?></td>
+                    <td><?php echo $row['func_nome_emp']; ?></td>
+                    <td><?php echo $row['func_nome_devol']; ?></td>
+                    <td><?php echo $row['estado_nome']; ?></td>
+                </tr>
+            <?php endforeach; ?>
             </tbody>
         </table>
     </div>
-</div>
+
+    <?php
+    if(empty($rows)) {
+        echo "<h2>Não há histórico</h2>";
+    }
+    ?>
 </body>
 
 </html>
