@@ -32,7 +32,7 @@ if(!isset($_SESSION["userId"])) {
             <ul class="navbar m-2 ">
                 <li class="mx-3"><a href="./emprestimos.php">Empréstimos</a></li>
                 <li class="mx-3"><a href="./historico.php">Histórico</a></li>
-                <li class="mx-3"><a href="/tab_alunos.html">Manutenção</a></li>
+                <li class="mx-3"><a href="./manutencao.php">Manutenção</a></li>
                 <li class="mx-3"><a href="./horarios.php">Horários</a></li>
                 <li class="mx-3"><a href="/estatisticas.html">Estatísticas</a></li>
             </ul>

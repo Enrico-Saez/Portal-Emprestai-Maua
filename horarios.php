@@ -31,7 +31,7 @@ if(!isset($_SESSION["userId"])) {
             <ul class="navbar m-2 ">
                 <li class="mx-3"><a href="./emprestimos.php">Empréstimos</a></li>
                 <li class="mx-3"><a href="./historico.php">Histórico</a></li>
-                <li class="mx-3"><a href="/tab_alunos.html">Manutenção</a></li>
+                <li class="mx-3"><a href="./manutencao.php">Manutenção</a></li>
                 <li class="mx-3"><a href="./horarios.php">Horários</a></li>
                 <li class="mx-3"><a href="/estatisticas.html">Estatísticas</a></li>
             </ul>
@@ -51,7 +51,18 @@ if(!isset($_SESSION["userId"])) {
             <select name="curso" id="curso">
                 <option value="null">selecione</option>
                 <option value="cic">Ciência da Computação</option>
-                <option value="sin">Sistemas de Informação</option>
+                <option value="si">Sistemas de Informação</option>
+                <option value="design">Design</option>
+                <option value="adm">Administração</option>
+                <option value="engcivil">Eng Civil</option>
+                <option value="engalimentos">Eng Alimentos</option>
+                <option value="engmecanica">Eng Mecânica</option>
+                <option value="engcomputacao">Eng Computação</option>
+                <option value="engcontroleaut">Eng Controle e Automação</option>
+                <option value="engproducao">Eng Produção</option>
+                <option value="engeletrica">Eng Elétrica</option>
+                <option value="engeletronica">Eng Eletrônica</option>
+                <option value="engquimica">Eng Química</option>
             </select>
         </div>
         <div class="selecionar_semestre col">
