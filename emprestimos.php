@@ -131,12 +131,15 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="ModalEmprestimoComHora">Empréstimo de alunos não cadastrados</h1>
+                <h1 class="modal-title fs-5" id="ModalEmprestimoEspecial">Empréstimo de alunos não cadastrados</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                <input class="container" type="text" placeholder="Clique aqui e utilize a leitora para escanear o ativo" id="barcode">
-            </div>
+            <form action="./includes/lending-register.inc.php" method="post" id="lending-form-especial">
+                <div class="modal-body">
+                    <input class="container" type="password" maxlength="5" placeholder="Escaneie o ativo do notebook" id="ativo-input-especial" name="ativo-input-especial">
+                    <input class="container" type="password" maxlength="8" placeholder="Escaneie o QRCode do aluno" id="qrcode-input-especial" name="qrcode-input-especial">
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -245,6 +248,94 @@
 
             if (elapsedTime > inputThreshold) {
                 QRCodeInput.value = '';
+            }
+        });
+    });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const modalEmprestimoEspecial = document.getElementById('ModalEmprestimoEspecial');
+        const ativoInputEspecial = document.getElementById('ativo-input-especial');
+        const QRCodeInputEspecial = document.getElementById('qrcode-input-especial');
+        const lendingFormEspecial = document.getElementById('lending-form-especial');
+        let modalEmprestimoEspecialShown = false;
+        let ativoInputEspecialBeingUsed = false;
+        let QRCodeInputEspecialBeingUsed = false;
+
+        //Quando modal é exibido, foco no input depois de 1s
+        modalEmprestimoEspecial.addEventListener('shown.bs.modal', function() {
+            modalEmprestimoEspecialShown = true;
+            QRCodeInputEspecial.disabled = true;
+            ativoInputEspecialBeingUsed = true;
+            ativoInputEspecial.focus();
+        });
+
+        modalEmprestimoEspecial.addEventListener('hidden.bs.modal', function() {
+            modalEmprestimoEspecialShown = false;
+        });
+
+        ativoInputEspecial.addEventListener('input', function() {
+            if(ativoInputEspecial.value.length === 5) {
+                ativoInputEspecialBeingUsed = false;
+                setTimeout(function() {
+                    QRCodeInputEspecial.disabled = false;
+                    QRCodeInputEspecialBeingUsed = true;
+                    QRCodeInputEspecial.focus();
+                }, 1000);
+            }
+        });
+
+        QRCodeInputEspecial.addEventListener('input', function() {
+            if(QRCodeInputEspecial.value.length === 8) {
+                lendingFormEspecial.submit();
+            }
+        });
+
+
+        //Lógica para inputs não saírem de foco
+
+
+        ativoInputEspecial.addEventListener('focusout', function() {
+            if (modalEmprestimoEspecialShown && ativoInputEspecialBeingUsed) {
+                setTimeout(function() {
+                    ativoInputEspecial.focus();
+                }, 0);
+            }
+        });
+
+        QRCodeInputEspecial.addEventListener('focusout', function() {
+            if (modalEmprestimoEspecialShown && QRCodeInputEspecialBeingUsed) {
+                setTimeout(function() {
+                    QRCodeInputEspecial.focus();
+                }, 0);
+            }
+        });
+
+
+        //Lógica pra inputs funcionarem só com leitor de código de barras
+
+
+        let lastKeyPressTime = 0;
+        let inputThreshold = 20;
+
+        ativoInputEspecial.addEventListener('keydown', function(event) {
+            let currentTime = new Date().getTime();
+            let elapsedTime = currentTime - lastKeyPressTime;
+            lastKeyPressTime = currentTime;
+
+            if (elapsedTime > inputThreshold) {
+                ativoInputEspecial.value = '';
+            }
+        });
+
+        QRCodeInputEspecial.addEventListener('keydown', function(event) {
+            let currentTime = new Date().getTime();
+            let elapsedTime = currentTime - lastKeyPressTime;
+            lastKeyPressTime = currentTime;
+
+            if (elapsedTime > inputThreshold) {
+                QRCodeInputEspecial.value = '';
             }
         });
     });
