@@ -190,11 +190,11 @@ if(!isset($_SESSION["userId"])) {
                     <input class="container" type="text" maxlength="5" placeholder="Insira aqui"
                         id="ativo-input-2" name="ativo-input">
                     <p class="container"><strong>RAs adicionados:</strong></p>
-                    <ul id="lista-ativos">
+                    <ul id="lista-ativos-2">
                     </ul>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" id="enviarAtivos" class="btn btn-primary">Confirmar alterações</button>
+                    <button type="submit" id="enviarAtivos-2" class="btn btn-primary">Confirmar alterações</button>
                 </div>
             </div>
         </div>
