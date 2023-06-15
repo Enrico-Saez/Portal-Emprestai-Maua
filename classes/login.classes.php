@@ -4,7 +4,7 @@ class Login extends Dbh {
 
     protected function getUser($email, $password) {
 
-        $query = "SELECT id, senha FROM funcionario WHERE email = ? AND id_estado = 6;";
+        $query = "SELECT id, senha, nome FROM funcionario WHERE email = ? AND id_estado = 6;";
         $stmt = $this->connect()->prepare($query);
 
         //Verifica se a query funciona
@@ -32,6 +32,7 @@ class Login extends Dbh {
 
         session_start();
         $_SESSION["userId"] = $rows[0]["id"];
+        $_SESSION["username"] = $rows[0]["nome"];
 
         $stmt = null;
 
