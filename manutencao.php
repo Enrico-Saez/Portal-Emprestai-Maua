@@ -188,7 +188,7 @@ if(!isset($_SESSION["userId"])) {
                 </div>
                 <div class="modal-body">
                     <input class="container" type="text" maxlength="5" placeholder="Insira aqui"
-                        id="ativo-input" name="ativo-input">
+                        id="ativo-input-2" name="ativo-input">
                     <p class="container"><strong>RAs adicionados:</strong></p>
                     <ul id="lista-ativos">
                     </ul>

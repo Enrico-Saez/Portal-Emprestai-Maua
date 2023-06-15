@@ -54,7 +54,6 @@ if(!isset($_SESSION["userId"])) {
             <h6>Escolha o curso:</h6>
         </div>
         <div class="col row">
-            <label for="mySelect">Selecione:</label>
             <select name="curso" id="curso">
                 <option value="cic">Ciência da Computação</option>
                 <option value="si">Sistemas de Informação</option>
@@ -76,19 +75,40 @@ if(!isset($_SESSION["userId"])) {
         </div>
         <div class="col row">
             <select name="semestre" id="semestre">
-                <option value="null">selecione</option>
-                <option value="lab1">lab1</option>
-                <option value="lab2">lab2</option>
+                <!-- options -->
             </select>
         </div>
+
         <div class="selecionar_lab col">
             <h6>Escolha o laboratório:</h6>
         </div>
         <div class="col row">
             <select name="lab" id="lab">
-                <option value="null">selecione</option>
-                <option value="lab1">lab1</option>
-                <option value="lab2">lab2</option>
+                <option value="lab1">Lab 1</option>
+                <option value="lab2">Lab 2</option>
+                <option value="lab3">Lab 3</option>
+                <option value="lab4">Lab 4</option>
+                <option value="lab5">Lab 5</option>
+                <option value="lab6">Lab 6</option>
+                <option value="lab7">Lab 7</option>
+                <option value="lab8">Lab 8</option>
+                <option value="lab9">Lab 9</option>
+                <option value="lab10">Lab 10</option>
+                <option value="lab1">Lab 11</option>
+                <option value="lab2">Lab 12</option>
+                <option value="lab3">Lab 13</option>
+                <option value="lab4">Lab 14</option>
+                <option value="lab5">Lab 15</option>
+                <option value="lab6">Lab 16</option>
+                <option value="lab7">Lab 17</option>
+                <option value="lab8">Lab 18</option>
+                <option value="lab9">Lab 19</option>
+                <option value="lab10">Lab 20</option>
+                <option value="lab10">Lab 21</option>
+                <option value="lab10">Lab 22</option>
+                <option value="lab10">Lab 23</option>
+                <option value="lab10">Lab 24</option>
+                <option value="lab10">Lab 25</option>
             </select>
         </div>
     </div>
@@ -146,6 +166,33 @@ if(!isset($_SESSION["userId"])) {
         <input type="submit" value="Salvar alterações">
     </div>
 </div>
+<script>
+    const cursoSelect = document.getElementById('curso');
+    const semestreSelect = document.getElementById('semestre');
+
+    // Event listener for curso select change
+    cursoSelect.addEventListener('change', updateSemestreOptions);
+
+    // Function to update semestre options based on curso selection
+    function updateSemestreOptions() {
+        const selectedCurso = cursoSelect.value;
+        const maxSemestre = selectedCurso.startsWith('eng') ? 10 : 8;
+
+        // Remove existing options
+        while (semestreSelect.firstChild) {
+            semestreSelect.removeChild(semestreSelect.firstChild);
+        }
+
+        // Add new options
+        for (let i = 1; i <= maxSemestre; i++) {
+            const option = document.createElement('option');
+            option.value = `semestre${i}`;
+            option.textContent = `Semestre ${i}`;
+            semestreSelect.appendChild(option);
+        }
+    }
+
+</script>
 </body>
 
 <script>
