@@ -36,7 +36,7 @@ if(!isset($_SESSION["userId"])) {
                     <li class="mx-3"><a href="./manutencao.php">Manutenção</a></li>
                     <li class="mx-3"><a href="./horarios.php">Horários</a></li>
                     <li class='ms-5'><a href='#'>
-                            <?php echo $_SESSION["userId"] ?>
+                            <?php echo $_SESSION["username"] ?>
                         </a></li>
                     <li class="ms-2"><a href="/index.php"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                 fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 1.5 16 16">
