@@ -25,8 +25,9 @@ if(!isset($_SESSION["userId"])) {
 <body>
 <nav class="navbar">
     <div class="container-fluid">
-        <a href="./index.php" class="navbar-brand">
-            <img src="/emprestai_logo.png" alt="Emprestaí, Mauá" width="100">
+        <a href="#" class="navbar-brand">
+            <img src="./media/emprestai_pintado.png" alt="Emprestai Mauá" width="300" height="40">
+        </a>
         </a>
         <div>
             <ul class="navbar m-2 ">
@@ -34,7 +35,12 @@ if(!isset($_SESSION["userId"])) {
                 <li class="mx-3"><a href="./historico.php">Histórico</a></li>
                 <li class="mx-3"><a href="./manutencao.php">Manutenção</a></li>
                 <li class="mx-3"><a href="./horarios.php">Horários</a></li>
-                <li class="mx-3"><a href="/estatisticas.html">Estatísticas</a></li>
+                <li class="mx-3"><a href="#">Estatísticas</a></li>
+                <li class='ms-5'><a href='#'><?php echo $_SESSION["userId"] ?></a></li>
+                <li class="ms-2"><a href="/index.php"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 1.5 16 16">
+                            <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
+                            <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+                        </svg></a></li>
             </ul>
         </div>
     </div>

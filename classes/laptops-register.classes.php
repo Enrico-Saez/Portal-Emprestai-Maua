@@ -11,7 +11,7 @@ class LaptopsRegister extends Dbh {
 
             if(!$stmt->execute(array($ativo, $marca, $modelo))) {
                 $stmt = null;
-                header("location: ../index.php?error=stmtfailed");
+                header("location: ../manutencao.php?error=stmtfailed");
                 exit();
             }
 

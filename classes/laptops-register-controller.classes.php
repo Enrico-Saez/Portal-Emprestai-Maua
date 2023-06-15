@@ -14,7 +14,7 @@ class LaptopsRegisterController extends LaptopsRegister {
 
     public function registerLaptops() {
         if($this->emptyInput()) {
-            header("location: ../emprestimos.php?error=emptyinput");
+            header("location: ../manutencao.php?error=emptyinput");
             exit();
         }
         $this->register($this->ativos, $this->marca, $this->modelo);

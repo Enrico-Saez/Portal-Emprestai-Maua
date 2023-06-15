@@ -1,8 +1,19 @@
 <?php
 
-if($_SERVER["REQUEST_METHOD"] == "POST") {
+function applyHtmlSpecialCharactersToList($list) {
+    foreach ($list as &$item) {
+        $item = htmlspecialchars($item, ENT_QUOTES, 'UTF-8');
+    }
+    unset($item);
+    return $list;
+}
 
-    $ativos = applyHtmlSpecialCharactersToList($_POST["ativos"]);
+if($_SERVER["REQUEST_METHOD"] == "POST") {
+    var_dump($_POST["ativos"]);
+    var_dump($_POST["marca"]);
+    var_dump($_POST["modelo"]);
+
+    $ativos = applyHtmlSpecialCharactersToList(json_decode($_POST["ativos"]));
     $marca = htmlspecialchars($_POST["marca"]);
     $modelo = htmlspecialchars($_POST["modelo"]);
 
@@ -14,14 +25,5 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $register->registerLaptops();
 
-    header("location: ../emprestimos.php");
-
-    function applyHtmlSpecialCharactersToList($list) {
-        foreach ($list as &$item) {
-            $item = htmlspecialchars($item, ENT_QUOTES, 'UTF-8');
-        }
-        unset($item);
-        return $list;
-    }
-
+    header("location: ../manutencao.php");
 }
