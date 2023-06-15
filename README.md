@@ -7,10 +7,10 @@
 
 <img src="./media/emprestai_fundoazul.jpg" alt="Logo do Projeto">
 
-> "Emprestaí, Mauá!" é um sistema 
+> O "Emprestaí, Mauá!" é um sistema que facilita o empréstimo de equipamentos, desenvolvido exclusivamente para o Instituto Mauá de Tecnologia. O sistema permite obter maior controle sobre os empréstimos realizados, além de agilizar o processo por meio de um aplicativo auxiliar. 
 
 
-## 💻 Link de acesso do site oficial
+## 💻 Site oficial
 
 <a href="http://www.emprestaimaua.com.br">emprestaimaua.com.br</a>
 
