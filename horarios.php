@@ -47,147 +47,152 @@ if(!isset($_SESSION["userId"])) {
     <h2><strong>Horários de Empréstimo</strong></h2>
 </div>
 <div class="container">
+	<div class="row">
+		<div class="selecionar_curso col">
+			<h6>Escolha o curso:</h6>
+		</div>
+		<div class="col row">
+			<select name="curso" id="curso">
+				<option value="cic">Ciência da Computação</option>
+				<option value="si">Sistemas de Informação</option>
+				<option value="design">Design</option>
+				<option value="adm">Administração</option>
+				<option value="engcivil">Eng Civil</option>
+				<option value="engalimentos">Eng Alimentos</option>
+				<option value="engmecanica">Eng Mecânica</option>
+				<option value="engcomputacao">Eng Computação</option>
+				<option value="engca">Eng Controle e Automação</option>
+				<option value="engproducao">Eng Produção</option>
+				<option value="engeletrica">Eng Elétrica</option>
+				<option value="engeletronica">Eng Eletrônica</option>
+				<option value="engquimica">Eng Química</option>
+				<option value="ciclobasico">Eng Ciclo Básico</option>
+			</select>
+		</div>
+		<div class="selecionar_semestre col">
+			<h6>Escolha o semestre:</h6>
+		</div>
+		<div class="col row">
+			<select name="semestre" id="semestre">
+				<!-- options -->
+			</select>
+		</div>
+		<div class="selecionar_lab col">
+			<h6>Escolha o laboratório:</h6>
+		</div>
+		<div class="col row">
+			<select name="lab" id="lab">
+				<!-- options -->
+			</select>
+		</div>
+	</div>
 
-    <div class="row">
-        <div class="selecionar_curso col">
-            <h6>Escolha o curso:</h6>
-        </div>
-        <div class="col row">
-            <select name="curso" id="curso">
-                <option value="cic">Ciência da Computação</option>
-                <option value="si">Sistemas de Informação</option>
-                <option value="design">Design</option>
-                <option value="adm">Administração</option>
-                <option value="engcivil">Eng Civil</option>
-                <option value="engalimentos">Eng Alimentos</option>
-                <option value="engmecanica">Eng Mecânica</option>
-                <option value="engcomputacao">Eng Computação</option>
-                <option value="engcontroleaut">Eng Controle e Automação</option>
-                <option value="engproducao">Eng Produção</option>
-                <option value="engeletrica">Eng Elétrica</option>
-                <option value="engeletronica">Eng Eletrônica</option>
-                <option value="engquimica">Eng Química</option>
-            </select>
-        </div>
-        <div class="selecionar_semestre col">
-            <h6>Escolha o semestre:</h6>
-        </div>
-        <div class="col row">
-            <select name="semestre" id="semestre">
-                <!-- options -->
-            </select>
-        </div>
+	<table id="tabela_horarios" class="table table-hover mt-4">
+		<thead>
+		<tr>
+			<th scope="col">Horários</th>
+			<th scope="col">Segunda</th>
+			<th scope="col">Terça</th>
+			<th scope="col">Quarta</th>
+			<th scope="col">Quinta</th>
+			<th scope="col">Sexta</th>
+		</tr>
+		</thead>
 
-        <div class="selecionar_lab col">
-            <h6>Escolha o laboratório:</h6>
-        </div>
-        <div class="col row">
-            <select name="lab" id="lab">
-                <option value="lab1">Lab 1</option>
-                <option value="lab2">Lab 2</option>
-                <option value="lab3">Lab 3</option>
-                <option value="lab4">Lab 4</option>
-                <option value="lab5">Lab 5</option>
-                <option value="lab6">Lab 6</option>
-                <option value="lab7">Lab 7</option>
-                <option value="lab8">Lab 8</option>
-                <option value="lab9">Lab 9</option>
-                <option value="lab10">Lab 10</option>
-                <option value="lab1">Lab 11</option>
-                <option value="lab2">Lab 12</option>
-                <option value="lab3">Lab 13</option>
-                <option value="lab4">Lab 14</option>
-                <option value="lab5">Lab 15</option>
-                <option value="lab6">Lab 16</option>
-                <option value="lab7">Lab 17</option>
-                <option value="lab8">Lab 18</option>
-                <option value="lab9">Lab 19</option>
-                <option value="lab10">Lab 20</option>
-                <option value="lab10">Lab 21</option>
-                <option value="lab10">Lab 22</option>
-                <option value="lab10">Lab 23</option>
-                <option value="lab10">Lab 24</option>
-                <option value="lab10">Lab 25</option>
-            </select>
-        </div>
-    </div>
+		<tbody class="table-group-divider">
+		<tr>
+			<th scope="row">7h40 às 9h20</th>
+			<td><input type="checkbox" id="segunda_7h40" name="subscribe" value="segunda_7h40" /></td>
+			<td><input type="checkbox" id="terca_7h40" name="subscribe" value="terca_7h40" /></td>
+			<td><input type="checkbox" id="quarta_7h40" name="subscribe" value="quarta_7h40" /></td>
+			<td><input type="checkbox" id="quinta_7h40" name="subscribe" value="quinta_7h40" /></td>
+			<td><input type="checkbox" id="sexta_7h40" name="subscribe" value="sexta_7h40" /></td>
+		</tr>
+		<tr>
+			<th scope="row">9h30 às 11h10</th>
+			<td><input type="checkbox" id="segunda_9h30" name="subscribe" value="segunda_9h30" /></td>
+			<td><input type="checkbox" id="terca_9h30" name="subscribe" value="terca_9h30" /></td>
+			<td><input type="checkbox" id="quarta_9h30" name="subscribe" value="quarta_9h30" /></td>
+			<td><input type="checkbox" id="quinta_9h30" name="subscribe" value="quinta_9h30" /></td>
+			<td><input type="checkbox" id="sexta_9h30" name="subscribe" value="sexta_9h30" /></td>
+		</tr>
+		<tr>
+			<th scope="row">11h20 às 13h00</th>
+			<td><input type="checkbox" id="segunda_11h20" name="subscribe" value="segunda_11h20" /></td>
+			<td><input type="checkbox" id="terca_11h20" name="subscribe" value="terca_11h20" /></td>
+			<td><input type="checkbox" id="quarta_11h20" name="subscribe" value="quarta_11h20" /></td>
+			<td><input type="checkbox" id="quinta_11h20" name="subscribe" value="quinta_11h20" /></td>
+			<td><input type="checkbox" id="sexta_11h20" name="subscribe" value="sexta_11h20" /></td>
+		</tr>
+		</tbody>
+	</table>
 
-    <table id="tabela_horarios" class="table table-hover mt-4">
-        <thead>
-        <tr>
-            <th scope="col">Horários</th>
-            <th scope="col">Segunda</th>
-            <th scope="col">Terça</th>
-            <th scope="col">Quarta</th>
-            <th scope="col">Quinta</th>
-            <th scope="col">Sexta</th>
-        </tr>
-        </thead>
+	<div class="row">
+		<h6 class="col">Tempo de tolerância:</h6>
+		<!-- Será um tempo de tolerância para o lab em si?-->
+		<select class="col" name="tolerancia" id="tolerancia">
+			<option value="tempo1">5min</option>
+			<option value="tempo2">10min</option>
+			<option value="tempo3">15min</option>
+		</select>
+	</div>
+	<div class="text-center m-5">
+		<button type="submit" id="enviarHorarios" class="btn">Salvar Alterações</button>
+	</div>
 
-        <tbody class="table-group-divider">
-        <tr>
-            <th scope="row">7h40 às 9h20</th>
-            <td><input type="checkbox" id="segunda_7h40" name="subscribe" value="segunda_7h40" /></td>
-            <td><input type="checkbox" id="terca_7h40" name="subscribe" value="terca_7h40" /></td>
-            <td><input type="checkbox" id="quarta_7h40" name="subscribe" value="quarta_7h40" /></td>
-            <td><input type="checkbox" id="quinta_7h40" name="subscribe" value="quinta_7h40" /></td>
-            <td><input type="checkbox" id="sexta_7h40" name="subscribe" value="sexta_7h40" /></td>
-        </tr>
-        <tr>
-            <th scope="row">9h30 às 11h10</th>
-            <td><input type="checkbox" id="segunda_9h30" name="subscribe" value="segunda_9h30" /></td>
-            <td><input type="checkbox" id="terca_9h30" name="subscribe" value="terca_9h30" /></td>
-            <td><input type="checkbox" id="quarta_9h30" name="subscribe" value="quarta_9h30" /></td>
-            <td><input type="checkbox" id="quinta_9h30" name="subscribe" value="quinta_9h30" /></td>
-            <td><input type="checkbox" id="sexta_9h30" name="subscribe" value="sexta_9h30" /></td>
-        </tr>
-        <tr>
-            <th scope="row">11h20 às 13h00</th>
-            <td><input type="checkbox" id="segunda_11h20" name="subscribe" value="segunda_11h20" /></td>
-            <td><input type="checkbox" id="terca_11h20" name="subscribe" value="terca_11h20" /></td>
-            <td><input type="checkbox" id="quarta_11h20" name="subscribe" value="quarta_11h20" /></td>
-            <td><input type="checkbox" id="quinta_11h20" name="subscribe" value="quinta_11h20" /></td>
-            <td><input type="checkbox" id="sexta_11h20" name="subscribe" value="sexta_11h20" /></td>
-        </tr>
-        </tbody>
-    </table>
-
-    <div class="row">
-        <h6 class="col">Tempo de tolerância:</h6>
-        <!-- Será um tempo de tolerância para o lab em si?-->
-        <select class="col" name="laboratório" id="laboratório">
-            <option value="tempo1">5min</option>
-            <option value="tempo2">10min</option>
-            <option value="tempo3">15min</option>
-        </select>
-    </div>
-    <div class="text-center m-5">
-        <input type="submit" value="Salvar alterações">
-    </div>
 </div>
 <script>
     const cursoSelect = document.getElementById('curso');
     const semestreSelect = document.getElementById('semestre');
-
+	const labSelect = document.getElementById('lab');
+	
     // Event listener for curso select change
     cursoSelect.addEventListener('change', updateSemestreOptions);
 
     // Function to update semestre options based on curso selection
     function updateSemestreOptions() {
         const selectedCurso = cursoSelect.value;
-        const maxSemestre = selectedCurso.startsWith('eng') ? 10 : 8;
+		let minSemestre;
+		let maxSemestre;
+		let maxlab;
+		
+		if(selectedCurso.startsWith('eng')) {
+			minSemestre = 3;
+			maxSemestre = 10;
+			maxlab = 5;
+		} else {
+			if(selectedCurso.endsWith('ciclobasico')) {
+				minSemestre = 1;
+				maxSemestre = 2;
+				maxlab = 24;
+			} else {
+				minSemestre = 1;
+				maxSemestre = 8;
+				maxlab = 5;				
+			}
+		}
 
         // Remove existing options
         while (semestreSelect.firstChild) {
             semestreSelect.removeChild(semestreSelect.firstChild);
         }
+		while (labSelect.firstChild) {
+            labSelect.removeChild(labSelect.firstChild);
+        }
 
         // Add new options
-        for (let i = 1; i <= maxSemestre; i++) {
+        for (let i = minSemestre; i <= maxSemestre; i++) {
             const option = document.createElement('option');
             option.value = `semestre${i}`;
             option.textContent = `Semestre ${i}`;
             semestreSelect.appendChild(option);
+        }
+		
+		for (let i = 1; i <= maxlab; i++) {
+            const option = document.createElement('option');
+            option.value = `${i}`;
+            option.textContent = `Lab ${i}`;
+            labSelect.appendChild(option);
         }
     }
 
@@ -274,8 +279,73 @@ if(!isset($_SESSION["userId"])) {
             if (elapsedTime > inputThreshold) {
                 QRCodeInput.value = '';
             }
-        });
+        });	
     });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+		const listaDeHorarios = [];
+		const enviarHorarios = document.getElementById("enviarHorarios");	
+		
+		enviarHorarios.addEventListener('click', function () {
+            postListData();
+        });
+		
+		function postListData() {
+			const curso = document.getElementById("curso");
+			const semestre = document.getElementById("semestre");
+			const lab = document.getElementById("lab");		
+			const tolerancia = document.getElementById("tolerancia");
+			
+			// Convert the list to JSON
+			let jsonData = JSON.stringify(listaDeHorarios);
+			
+			// Create a new form element
+            let form = document.createElement("form");
+            form.method = "POST";
+            form.action = "./includes/schedules-register.inc.php";
+			
+			// Create the first input field
+            let input1 = document.createElement("input");
+            input1.type = "text";
+            input1.name = "subscribes";
+            input1.value = listaDeHorarios;
+			
+			let input2 = document.createElement("input");
+            input2.type = "text";
+            input2.name = "curso";
+            input2.value = curso.value;
+
+            let input3 = document.createElement("input");
+            input3.type = "text";
+            input3.name = "semestre";
+            input3.value = semestre.value;
+
+            let input4 = document.createElement("input");
+            input4.type = "text";
+            input4.name = "lab";
+            input4.value = lab.value;
+
+            let input5 = document.createElement("input");
+            input5.type = "text";
+            input5.name = "tolerancia";
+            input5.value = tolerancia.value;
+			
+			// Append the inputs to the form
+            form.appendChild(input1);
+            form.appendChild(input2);
+            form.appendChild(input3);
+            form.appendChild(input4);
+            form.appendChild(input5);
+
+            // Append the form to the document body
+            document.body.appendChild(form);
+
+            // Submit the form
+            form.submit();
+        }	
+	});
 </script>
 
 </html>

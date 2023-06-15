@@ -281,10 +281,6 @@ if(!isset($_SESSION["userId"])) {
             postListData();
         });
 
-
-
-
-
         const listContainer = document.getElementById('lista-ativos');
 
         function addItem(ativo) {

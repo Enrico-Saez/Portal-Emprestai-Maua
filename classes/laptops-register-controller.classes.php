@@ -29,5 +29,4 @@ class LaptopsRegisterController extends LaptopsRegister {
         }
         return $result;
     }
-
 }

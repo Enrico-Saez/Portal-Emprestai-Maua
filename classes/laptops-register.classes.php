@@ -14,7 +14,6 @@ class LaptopsRegister extends Dbh {
                 header("location: ../manutencao.php?error=stmtfailed");
                 exit();
             }
-
         }
 
         $stmt = null;
