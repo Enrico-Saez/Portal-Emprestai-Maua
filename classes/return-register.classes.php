@@ -20,6 +20,13 @@ class returnRegister extends Dbh{
 
         $estadoEmprestimo = $stmt->fetchAll(PDO::FETCH_ASSOC)[0]["id_estado"];
 
+        if($estadoEmprestimo == 8) {
+            $estadoEmprestimo = 10;
+        }
+        if($estadoEmprestimo == 9) {
+            $estadoEmprestimo = 11;
+        }
+
         $stmt = null;
 
 
