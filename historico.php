@@ -35,7 +35,6 @@ if(!isset($_SESSION["userId"])) {
                 <li class="mx-3"><a href="./historico.php">Histórico</a></li>
                 <li class="mx-3"><a href="./manutencao.php">Manutenção</a></li>
                 <li class="mx-3"><a href="./horarios.php">Horários</a></li>
-                <li class="mx-3"><a href="#">Estatísticas</a></li>
                 <li class='ms-5'><a href='#'><?php echo $_SESSION["userId"] ?></a></li>
                 <li class="ms-2"><a href="/index.php"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 1.5 16 16">
                             <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
@@ -50,16 +49,20 @@ if(!isset($_SESSION["userId"])) {
         <h2><strong>Histórico</strong></h2>
     </div>
 
-    <div class="filtro row mb-4 p-2">
-        <div class="col"><strong>Filtrar por:</strong></div>
-        <div class="col">
-            <input type="search" name="filtro_RA" id="filtro" placeholder="RA do aluno">
-        </div>
-        <div class="col">
-            <input type="search" name="filtro_Ativo" id="filtro" placeholder="Ativo do Equipamento">
-        </div>
-        <div class="col">
-            <input type="date" name="filtro_Data" id="filtro">
+    <div class="container text-center">
+        <div class="filtro row mb-4 p-2">
+            <div class="col align-items-center justify-content-center">
+                <input class="col-6" type="search" name="filtro_RA" id="filtro_RA" placeholder="RA do aluno">
+                <button class="btn ml-2">Filtrar</button>
+            </div>
+            <div class="col align-items-center justify-content-center">
+                <input class="col-6" type="search" name="filtro_Ativo" id="filtro_Ativo" placeholder="Ativo do Equipamento">
+                <button class="btn ml-2">Filtrar</button>
+            </div>
+            <div class="col align-items-center">
+                <input class="col-6" type="date" name="filtro_Data" id="filtro_Data">
+                <button class="btn ml-2">Filtrar</button>
+            </div>
         </div>
     </div>
 
@@ -97,7 +100,10 @@ if(!isset($_SESSION["userId"])) {
 
     <?php
     if(empty($rows)) {
-        echo "<h2>Não há histórico</h2>";
+        echo "
+        <div>
+            <h2 class='text-center'>Não há histórico</h2>
+        </div>";
     }
     ?>
 </body>

@@ -10,7 +10,7 @@
   <div class="container caixa_login col-sm-12 col-md-5">
     <div class="mt-5">
         <img class="logo
-        " src="/media/medidacerta.png" alt="Emprestaí, Mauá">
+        " src="./media/medidacerta.png" alt="Emprestaí, Mauá">
     </div>
     
     <form class="inputs" action="includes/login.inc.php" method="post">
