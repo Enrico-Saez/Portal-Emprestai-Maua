@@ -7,7 +7,7 @@ class SearchForOngoingLendings extends Dbh {
         $query = "SELECT emprestimo.id FROM emprestimo
 	                    INNER JOIN aluno ON aluno.id = emprestimo.id_aluno
                         INNER JOIN equipamento ON equipamento.id = emprestimo.id_equipamento
-                        WHERE aluno.ra = ? AND equipamento.id_tipo_equipamento = 1 AND emprestimo.id_estado = 8 OR 9;";
+                        WHERE aluno.ra = ? AND equipamento.id_tipo_equipamento = 1 AND emprestimo.id_estado = 8 OR emprestimo.id_estado = 9;";
 
         $stmt = $this->connect()->prepare($query);
 
@@ -34,7 +34,7 @@ class SearchForOngoingLendings extends Dbh {
 
         $query = "SELECT emprestimo.id FROM emprestimo
                         INNER JOIN equipamento ON equipamento.id = emprestimo.id_equipamento
-                        WHERE equipamento.ativo = ? AND equipamento.id_tipo_equipamento = 1 AND emprestimo.id_estado = 8 OR 9;";
+                        WHERE equipamento.ativo = ? AND equipamento.id_tipo_equipamento = 1 AND emprestimo.id_estado = 8 OR emprestimo.id_estado = 9;";
 
         $stmt = $this->connect()->prepare($query);
 
