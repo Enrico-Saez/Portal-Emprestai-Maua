@@ -9,12 +9,12 @@ class LendingRegister extends SearchForOngoingLendings {
 
 
         if($this->searchByRA($ra)) {
-            header("location: ../emprestimos.php?error=DEFINIR");
+            header("location: ../emprestimos.php?error=raAlreadyHasLending");
             exit();
         }
 
         if($this->searchByAtivo($ativo)) {
-            header("location: ../emprestimos.php?error=DEFINIR ERROOOOO");
+            header("location: ../emprestimos.php?error=ativoAlreadyHasLending");
             exit();
         }
 
@@ -22,9 +22,7 @@ class LendingRegister extends SearchForOngoingLendings {
         //Recebe os IDs de aluno e equipamento com base no RA e ativo
 
 
-        $query = "SELECT id AS id_aluno, NULL AS id_equipamento FROM aluno WHERE ra = ?
-                    UNION
-                    SELECT NULL AS id_aluno, id AS id_equipamento FROM equipamento WHERE ativo = ?;";
+        $query = "SELECT equipamento.id AS id_equipamento, aluno.id AS id_aluno FROM aluno INNER JOIN equipamento WHERE RA= ? AND ativo= ?;";
         $stmt = $this->connect()->prepare($query);
 
         if(!$stmt->execute(array($ra, $ativo))) {
@@ -53,7 +51,7 @@ class LendingRegister extends SearchForOngoingLendings {
         $stmt = $this->connect()->prepare($query);
 
         session_start();
-        if(!$stmt->execute(array($id_aluno, $id_equipamento, date('Y-m-d H:i:s', strtotime('now')), $_SESSION["userId"]))) {
+        if(!$stmt->execute(array($id_aluno, $id_equipamento, date('Y-m-d H:i:s', strtotime('now America/Sao_Paulo' )), $_SESSION["userId"]))) {
             $stmt = null;
             header("location: ../emprestimos.php?error=stmtfailed");
             exit();

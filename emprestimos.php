@@ -48,9 +48,9 @@
 <div class="container">
 <div class="m-4 text-center row">
     <h2>Empréstimos</h2>
-    <button type="button" class="btn col m-1" data-bs-toggle="modal" data-bs-target="#ModalEmprestimo">Iniciar empréstimos</button>
-    <button type="button" class="btn col m-1" data-bs-toggle="modal" data-bs-target="#ModalEmprestimoEspecial">Iniciar empréstimos de alunos não cadastrados</button>
-    <button type="button" class="btn col m-1" data-bs-toggle="modal" data-bs-target="#ModalDevolucao">Iniciar devolução</button>
+    <button type="button" class="btn col m-1" data-bs-toggle="modal" data-bs-target="#ModalEmprestimo">Empréstimo</button>
+    <button type="button" class="btn col m-1" data-bs-toggle="modal" data-bs-target="#ModalEmprestimoEspecial">Empréstimo Especial</button>
+    <button type="button" class="btn col m-1" data-bs-toggle="modal" data-bs-target="#ModalDevolucao">Devolução</button>
 
 
 </div>
@@ -124,8 +124,8 @@
             </div>
             <form action="./includes/lending-register.inc.php" method="post" id="lending-form">
                 <div class="modal-body">
-                    <input class="container" type="text" maxlength="5" placeholder="Escaneie o ativo do notebook" id="ativo-input" name="ativo-input">
-                    <input class="container" type="password" maxlength="8" placeholder="Escaneie o QRCode do aluno" id="qrcode-input" name="qrcode-input">
+                    <input class="container" type="text" maxlength="5" placeholder="Escaneie o Ativo do Notebook" id="ativo-input" name="ativo-input">
+                    <input class="container" type="password" maxlength="8" placeholder="Escaneie o QRCode do Aluno" id="qrcode-input" name="qrcode-input">
                 </div>
             </form>
         </div>
